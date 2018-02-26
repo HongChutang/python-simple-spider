@@ -1,0 +1,2 @@
+# python-simple-spider
+一个简易的python实现的爬取百科上python词条下相关页面的标题和摘要的爬虫框架
