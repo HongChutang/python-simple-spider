@@ -7,7 +7,10 @@
 
 __author__ = 'Evan Hung'
 
-from baike_spider import url_manager, html_downloader, html_parser, html_outputer, spider_cfg
+import url_manager, html_downloader, html_parser, html_outputer, spider_cfg
+import logging
+logging.basicConfig(filename='python_simple_spider.log', filemode='w', level = logging.INFO,format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 
 class SpiderMain(object):
@@ -23,7 +26,7 @@ class SpiderMain(object):
         while self.urls.has_new_url(): # 如果url管理器中还有待爬取url则爬取
             try:
                 new_url = self.urls.get_new_url() # 获取本次爬取url
-                print 'craw %d: %s' % (count, new_url)
+                logger.info('craw %d: %s' % (count, new_url))
                 html_cont = self.downloader.download(new_url) # 下载页面
                 new_urls, new_data = self.parser.parse(new_url, html_cont) # 解析页面
                 self.urls.add_new_urls(new_urls) # 将本次爬取的页面中的url批量存入url管理器
